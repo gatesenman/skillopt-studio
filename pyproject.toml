@@ -1,0 +1,54 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "skillopt-studio"
+version = "0.1.0"
+description = "A cross-vendor desktop app for SkillOpt skill optimization (beginner wizard + pro mode + ACP agent)."
+readme = "README.md"
+license = { text = "MIT" }
+requires-python = ">=3.10"
+authors = [{ name = "SkillOpt Studio" }]
+keywords = ["skillopt", "agent", "skill-optimization", "desktop", "acp", "llm"]
+
+# Runtime deps for the desktop app. `skillopt` itself is an *optional* extra:
+# the app runs in demo mode without it, and drives real training when present.
+dependencies = [
+    "fastapi>=0.110.0",
+    "uvicorn>=0.29.0",
+    "websockets>=12.0",
+    "pydantic>=2.6.0",
+    "pyyaml>=6.0",
+    "pywebview>=5.0",
+]
+
+[project.optional-dependencies]
+# Install the upstream optimizer to enable live (non-demo) runs.
+skillopt = ["skillopt>=0.1.0"]
+dev = ["pytest>=8.0.0", "httpx>=0.27.0", "ruff>=0.4.0"]
+# One-click packaging.
+build = ["pyinstaller>=6.6.0"]
+# Native desktop window backend. On Linux this needs system WebKitGTK libs too
+# (see README); macOS/Windows ship a webview with the OS. Use the Qt extra if
+# you prefer Qt over GTK.
+desktop-gtk = ["pywebview[gtk]>=5.0"]
+desktop-qt = ["pywebview[qt]>=5.0"]
+
+[project.scripts]
+skillopt-studio = "skillopt_desktop.__main__:main"
+skillopt-acp = "skillopt_acp.server:main"
+
+[project.urls]
+Homepage = "https://microsoft.github.io/SkillOpt/"
+Upstream = "https://github.com/microsoft/SkillOpt"
+
+[tool.setuptools.packages.find]
+include = ["skillopt_desktop*", "skillopt_acp*"]
+
+[tool.setuptools.package-data]
+skillopt_desktop = ["web/**/*", "skillopt_assets_configs/**/*"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"

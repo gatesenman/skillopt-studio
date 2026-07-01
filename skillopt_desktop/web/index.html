@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SkillOpt Studio</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+  <div id="app">
+    <aside class="sidebar">
+      <div class="brand">
+        <div class="logo">◆</div>
+        <div>
+          <div class="brand-title">SkillOpt</div>
+          <div class="brand-sub" data-i18n="brand.sub">Studio</div>
+        </div>
+      </div>
+      <div class="lang-toggle" id="lang-toggle">
+        <button data-lang="zh" data-i18n="lang.zh">中</button>
+        <button data-lang="en" data-i18n="lang.en">EN</button>
+      </div>
+      <nav class="nav">
+        <button class="nav-item active" data-view="wizard" data-icon="wizard" data-i18n="nav.wizard"></button>
+        <button class="nav-item" data-view="pro" data-icon="pro" data-i18n="nav.pro"></button>
+        <button class="nav-item" data-view="monitor" data-icon="monitor" data-i18n="nav.monitor"></button>
+        <button class="nav-item" data-view="history" data-icon="history" data-i18n="nav.history"></button>
+        <button class="nav-item" data-view="skills" data-icon="skills" data-i18n="nav.skills"></button>
+        <button class="nav-item" data-view="sleep" data-icon="sleep" data-i18n="nav.sleep"></button>
+        <button class="nav-item" data-view="acp" data-icon="acp" data-i18n="nav.acp"></button>
+        <button class="nav-item" data-view="settings" data-icon="settings" data-i18n="nav.settings"></button>
+      </nav>
+      <div class="status-card" id="env-status">
+        <div class="dot"></div><span data-i18n="status.checking">检测环境中…</span>
+      </div>
+    </aside>
+    <main class="content">
+      <header class="topbar">
+        <div id="view-title">向导模式</div>
+        <div id="view-subtitle" class="subtitle"></div>
+      </header>
+      <section id="view-root" class="view-root"></section>
+    </main>
+  </div>
+  <div id="toast" class="toast"></div>
+  <script>
+    window.__bootError = "";
+    window.addEventListener("error", function (e) {
+      window.__bootError = String((e && (e.message || e.error)) || e);
+    });
+    window.addEventListener("unhandledrejection", function (e) {
+      window.__bootError = "promise: " + String((e && e.reason) || e);
+    });
+  </script>
+  <script type="module" src="/static/js/app.js"></script>
+</body>
+</html>

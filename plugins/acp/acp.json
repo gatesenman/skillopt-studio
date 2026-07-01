@@ -1,0 +1,16 @@
+{
+  "$comment": "Drop-in ACP agent manifest for SkillOpt. Point any ACP-compatible editor/agent at this command. See https://agentclientprotocol.com",
+  "name": "skillopt",
+  "displayName": "SkillOpt",
+  "description": "Optimize and evolve agent skills (SkillOpt) directly from your editor's AI dev agent.",
+  "protocol": "acp",
+  "transport": "stdio",
+  "command": "skillopt-acp",
+  "args": [],
+  "env": {},
+  "fallbackCommand": ["python", "-m", "skillopt_acp.server"],
+  "capabilities": {
+    "prompt": true,
+    "commands": ["optimize", "sleep", "skills", "help"]
+  }
+}
